@@ -17,7 +17,7 @@ Stop recording:
 thing.stop()
 ```
 
-Get a reference the file (returns a (URL Object)[https://developer.mozilla.org/en-US/docs/Web/API/window.URL])
+Get a reference the file (returns a [URL Object](https://developer.mozilla.org/en-US/docs/Web/API/window.URL))
 
 ```coffeescript
 thing.file()
