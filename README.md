@@ -4,23 +4,29 @@ A simple audio recorder for the web. Work in progress.
 
 ###Examples:
 
-Record a file:
+####Record a file:
 
 ```coffeescript
-thing = new Recorder()
-thing.record()
+voice = new Recorder()
+voice.record()
 ```
 
-Stop recording:
+####Stop recording:
 
 ```coffeescript
-thing.stop()
+voice.stop()
 ```
 
-Get a reference the file (returns a [URL Object](https://developer.mozilla.org/en-US/docs/Web/API/window.URL))
+####Get a reference the file
+returns a [URL Object](https://developer.mozilla.org/en-US/docs/Web/API/window.URL)
 
 ```coffeescript
-thing.file()
+voice.file()
 ```
-
 The example above makes it possible to pin the return value to a link or post to the server via AJAX.
+
+####Download the file locally
+
+```coffeescript
+voice.download()
+```
