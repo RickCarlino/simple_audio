@@ -30,3 +30,9 @@ The example above makes it possible to pin the return value to a link or post to
 ```coffeescript
 voice.download()
 ```
+
+Optionally, you may specify a filename for the download.
+
+```coffeescript
+voice.download('whatdoesthefoxsay.wav')
+```
