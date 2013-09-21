@@ -8,7 +8,7 @@ A simple audio recorder for the web. Work in progress.
 
 ```coffeescript
 voice = new Recorder()
-voice.record()
+voice.start()
 ```
 
 ####Stop recording:
