@@ -41,7 +41,6 @@
 
       bufferSize = 2048;
       recorder = context.createJavaScriptNode(bufferSize, 2, 2);
-      console.log('above');
       recorder.onaudioprocess = function(current_stream) {
         var left, right;
         if (!window.__recording) {
@@ -53,10 +52,8 @@
         window.__rightchannel.push(new Float32Array(right));
         return window.__recordingLength += bufferSize;
       };
-      console.log('below');
       volume.connect(recorder);
-      recorder.connect(context.destination);
-      return window.a.start();
+      return recorder.connect(context.destination);
     };
 
     Recorder.prototype.start = function() {
@@ -161,12 +158,8 @@
 
   })();
 
-  $(function() {
-    return window.a = new Recorder();
-  });
-
 }).call(this);
 
 /*
-//@ sourceMappingURL=sandbox3.map
+//@ sourceMappingURL=recorder.map
 */

@@ -9,7 +9,8 @@ class Recorder
       alert "Your browser doesn't support WebAudio or WebRTC. Upgrade to the latest Chrome or Firefox."
   setNastyGlobals: ->
     #This needs refactored. 
-    # Qucikfix because I keep scope of these when I call record.onaudioprcess()
+    # Scope was a big issue when working with onaudioprocess()
+    #This was a quickfix hack.
     window.__recording    = no
     window.__leftchannel  = []
     window.__rightchannel = []
@@ -26,27 +27,20 @@ class Recorder
         Lower values for buffer size will result in a lower (better) latency. 
         Higher values will be necessary to avoid audio breakup and glitches ###
     bufferSize = 2048
-
     #createJavaScriptNode has been renamed to createScriptProcessor.
     recorder = context.createJavaScriptNode(bufferSize, 2, 2)
-    console.log 'above'
     recorder.onaudioprocess = (current_stream) ->
       #This function just passes audio through it and collects it within a typed array.
       return  unless window.__recording
       left = current_stream.inputBuffer.getChannelData(0)
       right = current_stream.inputBuffer.getChannelData(1)
-      
       # we clone the samples
       window.__leftchannel.push new Float32Array(left)
       window.__rightchannel.push new Float32Array(right)
       window.__recordingLength += bufferSize
-    console.log 'below'
-
     # we connect the recorder
     volume.connect recorder
     recorder.connect context.destination
-    #Remove the following line in production. Just here to save me time in debugging.
-    window.a.start()
   start: ->
     window.__recording = yes
 
@@ -147,6 +141,3 @@ class Recorder
     while i < lng
       view.setUint8 offset + i, string.charCodeAt(i)
       i++
-
-$ ->
-  window.a = new Recorder()

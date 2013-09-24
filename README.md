@@ -2,6 +2,26 @@
 
 A simple audio recorder for the web. Work in progress.
 
+###Credits / Word of Warning
+This is a side project I started after reading a really great article / code snippet by [Thibault Imbert](http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/) as well as this [great talk by Chris Wilson](https://www.youtube.com/watch?v=hFsCG7v9Y4c).
+
+**The current build is not stable**.
+
+### Up and running
+
+####Adding it to a page
+Just download ```src/recorder.js``` to your project and require it via 
+
+```html
+<script type="text/javascript" src="src/recorder.js"></script>
+```
+
+####If you want to grab the whole repo
+ 1. Clone / fork this repo
+ 2. install static-here via ```npm install static-here```. If you don't have Coffeescript installed, you will need to install that also via ```sudo npm install -g coffee-script```.
+ 3. Run ```cake dev```. This will autocompile coffeescript and serve static files at [http://localhost:8888](http://localhost:8888).
+ 4. Take a look at [http://localhost:8888/index.html](http://localhost:8888/index.html) and [http://localhost:8888/SpecRunner.html](http://localhost:8888/SpecRunner.html).
+
 ###Examples:
 
 ####Record a file:

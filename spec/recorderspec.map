@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "recorderspec.js",
+  "sourceRoot": "..",
+  "sources": [
+    "spec/recorderspec.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA,CAAA,CAAqB,KAArB,CAAqB,CAArB;CACE,EAAW,CAAX,KAAW,CAAX;CACE,KAAA,IAAA;AAAS,CAAA,EAAA,GAAT,OAAA;CADF,IAAW;CAGR,CAAH,CAA0B,MAAA,EAA1B,UAAA;CACS,GAAP,EAAA,MAAA,CAAA;CADF,IAA0B;CAJ5B,EAAqB;CAArB"
+}

@@ -1,4 +1,5 @@
-// variables
+// This is a great example from TypedArray.org by Thibault Imburt
+// http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/
 var leftchannel = [];
 var rightchannel = [];
 var recorder = null;
