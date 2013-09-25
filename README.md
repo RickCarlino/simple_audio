@@ -2,7 +2,7 @@
 
 A simple audio recorder for the web.
 
-**[Live Demo](https://github.io/rickcarlino/simple_audio/master/index.html)**
+**[Live Demo](https://rawgithub.com/rickcarlino/simple_audio/master/index.html)**
 
 ###Credits
 This project is based heavily off of the work of [Thibault Imbert](http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/) as well as this [great talk by Chris Wilson](https://www.youtube.com/watch?v=hFsCG7v9Y4c).
