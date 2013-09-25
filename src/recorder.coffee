@@ -1,4 +1,4 @@
-class Recorder
+class window.Recorder
   constructor: ->
     navigator.getUserMedia = navigator.getUserMedia or navigator.webkitGetUserMedia or navigator.mozGetUserMedia or navigator.msGetUserMedia  unless navigator.getUserMedia
     @sampleRate = 44100
