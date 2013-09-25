@@ -6,13 +6,14 @@
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
       }
       this.sampleRate = 44100;
+      this.errors = [];
       this.setNastyGlobals();
       if (navigator.getUserMedia) {
         navigator.getUserMedia({
           audio: true
         }, this.sample, this.failure);
       } else {
-        alert("Your browser doesn't support WebAudio or WebRTC. Upgrade to the latest Chrome or Firefox.");
+        errors.push("Browser does not support WebRTC.");
       }
     }
 

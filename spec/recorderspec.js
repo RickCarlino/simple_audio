@@ -2,11 +2,25 @@
 (function() {
   describe("Recorder", function() {
     beforeEach(function() {
-      var player;
-      return player = new Recording;
+      return this.recording = new Recording;
     });
-    return it("should do something", function() {
-      return expect(true).toBe­Tru­thy();
+    it("initializes", function() {
+      expect(this.recording.errors.length).toEqual(0);
+      return expect(this.recording.sampleRate).toEqual(44100);
+    });
+    it("sets and resets global variables (sorry...)", function() {
+      window.__recording = -99;
+      window.__leftchannel = -99;
+      window.__rightchannel = -99;
+      window.__recordingLength = -99;
+      this.recording.setNastyGlobals();
+      expect(window.__recording).toEqual(false);
+      expect(window.__leftchannel).toEqual([]);
+      expect(window.__rightchannel).toEqual([]);
+      return expect(window.__recordingLength).toEqual(0);
+    });
+    return it('starts', function() {
+      return this.recording.start();
     });
   });
 

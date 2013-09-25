@@ -2,11 +2,12 @@ class window.Recording
   constructor: ->
     navigator.getUserMedia = navigator.getUserMedia or navigator.webkitGetUserMedia or navigator.mozGetUserMedia or navigator.msGetUserMedia  unless navigator.getUserMedia
     @sampleRate = 44100
+    @errors     = []
     @setNastyGlobals()
     if navigator.getUserMedia
       navigator.getUserMedia  {audio: true} , @sample, @failure
     else
-      alert "Your browser doesn't support WebAudio or WebRTC. Upgrade to the latest Chrome or Firefox."
+      errors.push "Browser does not support WebRTC."
   setNastyGlobals: ->
     #This needs refactored. 
     # Scope was a big issue when working with onaudioprocess()
