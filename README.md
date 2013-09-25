@@ -1,11 +1,14 @@
 #Simple Audio
 
-A simple audio recorder for the web. Work in progress.
+A simple audio recorder for the web.
 
-###Credits / Word of Warning
-This is a side project I started after reading a really great article / code snippet by [Thibault Imbert](http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/) as well as this [great talk by Chris Wilson](https://www.youtube.com/watch?v=hFsCG7v9Y4c).
+**[Live Demo](https://github.io/rickcarlino/simple_audio/master/index.html)**
 
-**The current build is not stable**.
+###Credits
+This project is based heavily off of the work of [Thibault Imbert](http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/) as well as this [great talk by Chris Wilson](https://www.youtube.com/watch?v=hFsCG7v9Y4c).
+
+###Word of Warning
+**The current build is not stable**. I would avoid using it in production at the current time as performance has been inconsistent across platforms.
 
 ### Up and running
 
@@ -16,9 +19,9 @@ Just download ```src/recorder.js``` to your project and require it via
 <script type="text/javascript" src="src/recorder.js"></script>
 ```
 
-####If you want to grab the whole repo
+#### Cloning and Forking
  1. Clone / fork this repo
- 2. install static-here via ```npm install static-here```. If you don't have Coffeescript installed, you will need to install that also via ```sudo npm install -g coffee-script```.
+ 2. install static-here via ```npm install static-here```. If you don't have Coffeescript installed, you will need to install it via ```sudo npm install -g coffee-script```.
  3. Run ```cake dev```. This will autocompile coffeescript and serve static files at [http://localhost:8888](http://localhost:8888).
  4. Take a look at [http://localhost:8888/index.html](http://localhost:8888/index.html) and [http://localhost:8888/SpecRunner.html](http://localhost:8888/SpecRunner.html).
 
@@ -27,17 +30,17 @@ Just download ```src/recorder.js``` to your project and require it via
 ####Record a file:
 
 ```coffeescript
-voice = new Recorder()
+voice = new Recording()
 voice.start()
 ```
 
-####Stop recording:
+####Stop Recording:
 
 ```coffeescript
 voice.stop()
 ```
 
-####Get a reference the file
+####Reference the File
 returns a [URL Object](https://developer.mozilla.org/en-US/docs/Web/API/window.URL)
 
 ```coffeescript
@@ -45,7 +48,7 @@ voice.file()
 ```
 The example above makes it possible to pin the return value to a link or post to the server via AJAX.
 
-####Download the file locally
+####Download the File Locally
 
 ```coffeescript
 voice.download()

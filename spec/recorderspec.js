@@ -3,7 +3,7 @@
   describe("Recorder", function() {
     beforeEach(function() {
       var player;
-      return player = new Recorder;
+      return player = new Recording;
     });
     return it("should do something", function() {
       return expect(true).toBe­Tru­thy();

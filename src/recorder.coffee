@@ -1,4 +1,4 @@
-class window.Recorder
+class window.Recording
   constructor: ->
     navigator.getUserMedia = navigator.getUserMedia or navigator.webkitGetUserMedia or navigator.mozGetUserMedia or navigator.msGetUserMedia  unless navigator.getUserMedia
     @sampleRate = 44100
@@ -26,7 +26,7 @@ class window.Recorder
         dispatched and how many sample-frames need to be processed each call. 
         Lower values for buffer size will result in a lower (better) latency. 
         Higher values will be necessary to avoid audio breakup and glitches ###
-    bufferSize = 2048
+    bufferSize = 1024
     #createJavaScriptNode has been renamed to createScriptProcessor.
     recorder = context.createJavaScriptNode(bufferSize, 2, 2)
     recorder.onaudioprocess = (current_stream) ->
