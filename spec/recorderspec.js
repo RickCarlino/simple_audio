@@ -2,7 +2,7 @@
 (function() {
   describe("Recorder", function() {
     beforeEach(function() {
-      return this.recording = new Recording;
+      return this.recording = new Recording();
     });
     it("initializes", function() {
       expect(this.recording.errors.length).toEqual(0);
@@ -20,7 +20,10 @@
       return expect(window.__recordingLength).toEqual(0);
     });
     return it('starts', function() {
-      return this.recording.start();
+      this.recording.start();
+      waits(500);
+      this.recording.stop();
+      return expect(this.recording.blob.length).toBeGreaterThan(44);
     });
   });
 
