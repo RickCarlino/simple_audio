@@ -17,27 +17,23 @@
 # expect(spy).toHaveBeenCalledWith(arguments)
 
 describe "Recorder", ->
+
   beforeEach ->
     @recording = new Recording()
+    #TODO: Use a callback to wait for user to click permissions. 
+    #This is just a simple 2 second timeout until a more elegant solution arises.
+    waits(2000)
+    @recording.start()
+    waits(5000)
+    @recording.stop()
 
-  it "initializes", ->
+  it "Records audio", ->
     expect(@recording.errors.length).toEqual(0)
     expect(@recording.sampleRate).toEqual(44100)
-
-  it "sets and resets global variables (sorry...)", ->
-    window.__recording         = -99
-    window.__leftchannel       = -99
-    window.__rightchannel      = -99
-    window.__recordingLength   = -99
-    @recording.setNastyGlobals()
     expect(window.__recording).toEqual(no)
     expect(window.__leftchannel).toEqual([])
     expect(window.__rightchannel).toEqual([])
     expect(window.__recordingLength).toEqual(0)
-
-  it 'starts', ->
-    #TODO: This spec.
-    @recording.start()
-    waits(500)
-    @recording.stop()
-    expect(@recording.blob.length).toBeGreaterThan(44)
+    expect(@recording.blob.constructor.name).toEqual("Blob")
+    expect(@recording.blob.type).toEqual("audio/wav")
+    expect(@recording.blob.size).toBeGreaterThan(45)

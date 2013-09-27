@@ -2,28 +2,22 @@
 (function() {
   describe("Recorder", function() {
     beforeEach(function() {
-      return this.recording = new Recording();
+      this.recording = new Recording();
+      waits(2000);
+      this.recording.start();
+      waits(5000);
+      return this.recording.stop();
     });
-    it("initializes", function() {
+    return it("Records audio", function() {
       expect(this.recording.errors.length).toEqual(0);
-      return expect(this.recording.sampleRate).toEqual(44100);
-    });
-    it("sets and resets global variables (sorry...)", function() {
-      window.__recording = -99;
-      window.__leftchannel = -99;
-      window.__rightchannel = -99;
-      window.__recordingLength = -99;
-      this.recording.setNastyGlobals();
+      expect(this.recording.sampleRate).toEqual(44100);
       expect(window.__recording).toEqual(false);
       expect(window.__leftchannel).toEqual([]);
       expect(window.__rightchannel).toEqual([]);
-      return expect(window.__recordingLength).toEqual(0);
-    });
-    return it('starts', function() {
-      this.recording.start();
-      waits(500);
-      this.recording.stop();
-      return expect(this.recording.blob.length).toBeGreaterThan(44);
+      expect(window.__recordingLength).toEqual(0);
+      expect(this.recording.blob.constructor.name).toEqual("Blob");
+      expect(this.recording.blob.type).toEqual("audio/wav");
+      return expect(this.recording.blob.size).toBeGreaterThan(45);
     });
   });
 
