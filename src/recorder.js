@@ -13,7 +13,7 @@
           audio: true
         }, this.sample, this.failure);
       } else {
-        errors.push("Browser does not support WebRTC.");
+        this.errors.push("Browser does not support WebRTC.");
       }
     }
 

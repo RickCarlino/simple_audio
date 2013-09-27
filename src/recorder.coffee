@@ -7,7 +7,7 @@ class window.Recording
     if navigator.getUserMedia
       navigator.getUserMedia  {audio: true} , @sample, @failure
     else
-      errors.push "Browser does not support WebRTC."
+      @errors.push "Browser does not support WebRTC."
   setNastyGlobals: ->
     #This needs refactored. 
     # Scope was a big issue when working with onaudioprocess()

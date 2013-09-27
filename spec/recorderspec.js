@@ -4,13 +4,16 @@
     beforeEach(function() {
       this.recording = new Recording();
       waits(2000);
-      this.recording.start();
-      waits(5000);
-      return this.recording.stop();
+      return this.recording.start();
     });
     return it("Records audio", function() {
       expect(this.recording.errors.length).toEqual(0);
       expect(this.recording.sampleRate).toEqual(44100);
+      expect(window.__recording).toEqual(true);
+      expect(window.__leftchannel).not.toEqual([]);
+      expect(window.__rightchannel).not.toEqual([]);
+      expect(window.__recordingLength).toBeGreaterThan(0);
+      this.recording.stop();
       expect(window.__recording).toEqual(false);
       expect(window.__leftchannel).toEqual([]);
       expect(window.__rightchannel).toEqual([]);
