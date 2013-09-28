@@ -32,6 +32,7 @@ class window.Recording
     recorder = context.createJavaScriptNode(bufferSize, 2, 2)
     recorder.onaudioprocess = (current_stream) ->
       #This function just passes audio through it and collects it within a typed array.
+      #Profile this.
       return  unless window.__recording
       left = current_stream.inputBuffer.getChannelData(0)
       right = current_stream.inputBuffer.getChannelData(1)

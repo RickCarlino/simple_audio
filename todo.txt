@@ -1,3 +1,5 @@
 - Write unit tests for all helper functions
 - Cleanup global variables into a more compact namespace
 - Write documentation
+- Write a package.json
+- integrate with bower
