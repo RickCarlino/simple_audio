@@ -5,10 +5,10 @@ A simple audio recorder for the web.
 **[Live Demo](http://rickcarlino.github.io/simple_audio/)**
 
 ###Credits
-This project is based heavily off of the work of [Thibault Imbert](http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/) as well as this [great talk by Chris Wilson](https://www.youtube.com/watch?v=hFsCG7v9Y4c).
+This project is based heavily off a blog post by [Thibault Imbert](http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/) as well as this [great talk by Chris Wilson](https://www.youtube.com/watch?v=hFsCG7v9Y4c).
 
 ###Word of Warning
-**The current build is not stable**. I would avoid using it in production at the current time as performance has been inconsistent across platforms.
+**These APIs are constantly changing.** Many of the technologies used in this plugin have not been finalized and may be subject to change. Proceed with caution.
 
 ### Up and running
 

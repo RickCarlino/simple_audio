@@ -2,26 +2,68 @@
 (function() {
   describe("Recorder", function() {
     return describe("recording", function() {
-      beforeEach(function() {
-        this.recording = new Recording();
+      it('starts', function() {
+        /* Let's talk about this first spec...
+         This spec adds a 2000 milisec pause to give the tester adequate time to 
+         click the 'allow' button on their browser. I am not particularly happy
+         with this as it is sloppy, but I have not seen a solution out there that
+         fixes the issue while maintaining portability of the repo / keeping all
+         configuration within the repo. Please submit a pull request if you have a
+         better way of doing this.
+        */
+
+        window.recording1 = new Recording();
         waits(2000);
-        return this.recording.start();
+        return recording1.start();
       });
-      return it("Records audio", function() {
-        expect(this.recording.errors.length).toEqual(0);
-        expect(this.recording.sampleRate).toEqual(44100);
-        expect(window.__recording).toEqual(true);
-        expect(window.__leftchannel).not.toEqual([]);
-        expect(window.__rightchannel).not.toEqual([]);
-        expect(window.__recordingLength).toBeGreaterThan(0);
-        this.recording.stop();
-        expect(window.__recording).toEqual(false);
-        expect(window.__leftchannel).toEqual([]);
-        expect(window.__rightchannel).toEqual([]);
-        expect(window.__recordingLength).toEqual(0);
-        expect(this.recording.blob.constructor.name).toEqual("Blob");
-        expect(this.recording.blob.type).toEqual("audio/wav");
-        return expect(this.recording.blob.size).toBeGreaterThan(45);
+      it("clears error log on initialize", function() {
+        return expect(recording1.errors.length).toEqual(0);
+      });
+      it("sets a sample rate", function() {
+        return expect(recording1.sampleRate).toEqual(44100);
+      });
+      it("turns on recording flag", function() {
+        return expect(simpleAudioConfig.is_recording).toEqual(true);
+      });
+      it("populates left channel samples", function() {
+        return expect(simpleAudioConfig.leftchannel).not.toEqual([]);
+      });
+      it("populates right channel samples", function() {
+        return expect(simpleAudioConfig.rightchannel).not.toEqual([]);
+      });
+      it("populates recording length data", function() {
+        return expect(simpleAudioConfig.recordingLength).toBeGreaterThan(0);
+      });
+      it("stops the recorder", function() {
+        return recording1.stop();
+      });
+      it("turns off recorder flag after recording", function() {
+        return expect(simpleAudioConfig.is_recording).toEqual(false);
+      });
+      it("clears left channel after recording", function() {
+        return expect(simpleAudioConfig.leftchannel).toEqual([]);
+      });
+      it("clears right channel after recording", function() {
+        return expect(simpleAudioConfig.rightchannel).toEqual([]);
+      });
+      it("clears recording length after recording", function() {
+        return expect(simpleAudioConfig.recordingLength).toEqual(0);
+      });
+      it("creates a Blob object", function() {
+        return expect(recording1.blob.constructor.name).toEqual("Blob");
+      });
+      it("sets Blob meta data", function() {
+        return expect(recording1.blob.type).toEqual("audio/wav");
+      });
+      it("sets WAV binary file headers", function() {
+        return expect(recording1.blob.size).toBeGreaterThan(43);
+      });
+      it("populats audio data", function() {
+        return expect(recording1.blob.size).toBeGreaterThan(45);
+      });
+      return it("creates a URL object", function() {
+        expect(recording1.url.toString()).toMatch('http');
+        return expect(recording1.url.toString()).toMatch('blob');
       });
     });
   });

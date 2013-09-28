@@ -18,10 +18,18 @@
     }
 
     Recording.prototype.setNastyGlobals = function() {
-      window.__recording = false;
-      window.__leftchannel = [];
-      window.__rightchannel = [];
-      window.__recordingLength = 0;
+      /*
+        I am open to input on this one. I tried to confine these variables to the local instance,
+        but it appears as though AudioContext#onaudiprocess does not preserve context well (yes, 
+        I tried using the fat arrow).
+      */
+
+      window.simpleAudioConfig = {
+        is_recording: false,
+        leftchannel: [],
+        rightchannel: [],
+        recordingLength: 0
+      };
       return null;
     };
 
@@ -42,31 +50,31 @@
       recorder = context.createScriptProcessor(bufferSize, 2, 2);
       recorder.onaudioprocess = function(current_stream) {
         var left, right;
-        if (!window.__recording) {
+        if (!simpleAudioConfig.is_recording) {
           return;
         }
         left = current_stream.inputBuffer.getChannelData(0);
         right = current_stream.inputBuffer.getChannelData(1);
-        window.__leftchannel.push(new Float32Array(left));
-        window.__rightchannel.push(new Float32Array(right));
-        return window.__recordingLength += bufferSize;
+        simpleAudioConfig.leftchannel.push(new Float32Array(left));
+        simpleAudioConfig.rightchannel.push(new Float32Array(right));
+        return simpleAudioConfig.recordingLength += bufferSize;
       };
       volume.connect(recorder);
       return recorder.connect(context.destination);
     };
 
     Recording.prototype.start = function() {
-      window.__recording = true;
-      window.__leftchannel.length = window.__rightchannel.length = 0;
-      window.__recordingLength = 0;
+      simpleAudioConfig.is_recording = true;
+      simpleAudioConfig.leftchannel.length = simpleAudioConfig.rightchannel.length = 0;
+      simpleAudioConfig.recordingLength = 0;
       return console.log("Recording now...");
     };
 
     Recording.prototype.stop = function() {
       var buffer, i, index, interleaved, leftBuffer, lng, recording, rightBuffer, view, volume;
       recording = false;
-      leftBuffer = this._mergeBuffers(window.__leftchannel, window.__recordingLength);
-      rightBuffer = this._mergeBuffers(window.__rightchannel, window.__recordingLength);
+      leftBuffer = this._mergeBuffers(simpleAudioConfig.leftchannel, simpleAudioConfig.recordingLength);
+      rightBuffer = this._mergeBuffers(simpleAudioConfig.rightchannel, simpleAudioConfig.recordingLength);
       interleaved = this._interleave(leftBuffer, rightBuffer);
       buffer = new ArrayBuffer(44 + interleaved.length * 2);
       view = new DataView(buffer);
@@ -77,8 +85,8 @@
       view.setUint32(16, 16, true);
       view.setUint16(20, 1, true);
       view.setUint16(22, 2, true);
-      view.setUint32(24, window.__sampleRate, true);
-      view.setUint32(28, window.__sampleRate * 4, true);
+      view.setUint32(24, simpleAudioConfig.sampleRate, true);
+      view.setUint32(28, simpleAudioConfig.sampleRate * 4, true);
       view.setUint16(32, 4, true);
       view.setUint16(34, 16, true);
       this._writeUTFBytes(view, 36, "data");

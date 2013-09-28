@@ -9,13 +9,16 @@ class window.Recording
     else
       @errors.push "Browser does not support WebRTC."
   setNastyGlobals: ->
-    #This needs refactored. 
-    # Scope was a big issue when working with onaudioprocess()
-    #This was a quickfix hack.
-    window.__recording    = no
-    window.__leftchannel  = []
-    window.__rightchannel = []
-    window.__recordingLength = 0
+    ###
+      I am open to input on this one. I tried to confine these variables to the local instance,
+      but it appears as though AudioContext#onaudiprocess does not preserve context well (yes, 
+      I tried using the fat arrow).
+    ###
+    window.simpleAudioConfig = 
+      is_recording    : no
+      leftchannel     : []
+      rightchannel    : []
+      recordingLength : 0
     null
   sample: (current_stream) ->
     AudioCtx = window.AudioContext or window.webkitAudioContext
@@ -26,37 +29,37 @@ class window.Recording
     ### From the spec: This value controls how frequently the audioprocess event is 
         dispatched and how many sample-frames need to be processed each call. 
         Lower values for buffer size will result in a lower (better) latency. 
-        Higher values will be necessary to avoid audio breakup and glitches ###
+        Higher values will be necessary to avoid audio breakup and glitches 
+    ###
     bufferSize = 1024
-    #createJavaScriptNode has been renamed to createScriptProcessor.
     recorder = context.createScriptProcessor(bufferSize, 2, 2)
     recorder.onaudioprocess = (current_stream) ->
       #This function just passes audio through it and collects it within a typed array.
       #Profile this.
-      return  unless window.__recording
+      return  unless simpleAudioConfig.is_recording
       left = current_stream.inputBuffer.getChannelData(0)
       right = current_stream.inputBuffer.getChannelData(1)
       # we clone the samples
-      window.__leftchannel.push new Float32Array(left)
-      window.__rightchannel.push new Float32Array(right)
-      window.__recordingLength += bufferSize
+      simpleAudioConfig.leftchannel.push new Float32Array(left)
+      simpleAudioConfig.rightchannel.push new Float32Array(right)
+      simpleAudioConfig.recordingLength += bufferSize
     # we connect the recorder
     volume.connect recorder
     recorder.connect context.destination
   start: ->
-    window.__recording = yes
+    simpleAudioConfig.is_recording = yes
 
     # reset the buffers for the new recording
-    window.__leftchannel.length = window.__rightchannel.length = 0
-    window.__recordingLength = 0
+    simpleAudioConfig.leftchannel.length = simpleAudioConfig.rightchannel.length = 0
+    simpleAudioConfig.recordingLength = 0
     console.log "Recording now..."
   stop: ->
     # we stop recording
     recording = no
 
     # we flat the left and right channels down
-    leftBuffer  = @_mergeBuffers(window.__leftchannel, window.__recordingLength)
-    rightBuffer = @_mergeBuffers(window.__rightchannel, window.__recordingLength)
+    leftBuffer  = @_mergeBuffers(simpleAudioConfig.leftchannel, simpleAudioConfig.recordingLength)
+    rightBuffer = @_mergeBuffers(simpleAudioConfig.rightchannel, simpleAudioConfig.recordingLength)
 
     # we interleave both channels together
     interleaved = @_interleave(leftBuffer, rightBuffer)
@@ -77,8 +80,8 @@ class window.Recording
 
     # stereo (2 channels)
     view.setUint16 22, 2, true
-    view.setUint32 24, window.__sampleRate, true
-    view.setUint32 28, window.__sampleRate * 4, true
+    view.setUint32 24, simpleAudioConfig.sampleRate, true
+    view.setUint32 28, simpleAudioConfig.sampleRate * 4, true
     view.setUint16 32, 4, true
     view.setUint16 34, 16, true
 
