@@ -29,7 +29,7 @@ class window.Recording
         Higher values will be necessary to avoid audio breakup and glitches ###
     bufferSize = 1024
     #createJavaScriptNode has been renamed to createScriptProcessor.
-    recorder = context.createJavaScriptNode(bufferSize, 2, 2)
+    recorder = context.createScriptProcessor(bufferSize, 2, 2)
     recorder.onaudioprocess = (current_stream) ->
       #This function just passes audio through it and collects it within a typed array.
       #Profile this.

@@ -39,7 +39,7 @@
       */
 
       bufferSize = 1024;
-      recorder = context.createJavaScriptNode(bufferSize, 2, 2);
+      recorder = context.createScriptProcessor(bufferSize, 2, 2);
       recorder.onaudioprocess = function(current_stream) {
         var left, right;
         if (!window.__recording) {

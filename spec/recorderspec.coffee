@@ -26,7 +26,7 @@ describe "Recorder", ->
       #WAV binary file headers are 44 bytes long (excluding audio data)
       expect(@recording.blob.size).toBeGreaterThan(45)
 
-  describe 'helper methods', ->
-    #TODO: This stuff.
-    it 'write utf bytes', ->
-      #_writeUTFBytes
+  # describe 'helper methods', ->
+  #   #TODO: This stuff.
+  #   it 'write utf bytes', ->
+  #     #_writeUTFBytes
