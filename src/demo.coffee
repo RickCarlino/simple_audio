@@ -1,3 +1,4 @@
+#This is the sourcecode to the demo seen on the repo's github page.
 $ ->
   $('#init').on 'click', (e) ->
     e.preventDefault()
