@@ -20,9 +20,9 @@ Just download ```src/recorder.js``` to your project and require it via
 ```
 
 #### Contributing / Running the test suite
- 1. After cloning, install static-here via ```npm install static-here```. If you don't have Coffeescript installed, you will need to install it via ```sudo npm install -g coffee-script```.
- 2. Run ```cake dev```. This will autocompile coffeescript and serve static files at [http://localhost:8888](http://localhost:8888).
- 3. Take a look at [http://localhost:8888/index.html](http://localhost:8888/index.html) and [http://localhost:8888/SpecRunner.html](http://localhost:8888/SpecRunner.html).
+ n. After cloning, install dependencies via ```npm install```.
+ n. Run ```npm start```. This will autocompile coffeescript and serve static files at [http://localhost:8888](http://localhost:8888).
+ n. Take a look at [http://localhost:8888/index.html](http://localhost:8888/index.html) and [http://localhost:8888/SpecRunner.html](http://localhost:8888/SpecRunner.html).
 
 ###Examples:
 
