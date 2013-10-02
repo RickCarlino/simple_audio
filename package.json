@@ -1,0 +1,14 @@
+{
+  "name": "simple-audio",
+  "version": "0.0.5",
+  "description": "A simple audio recorder for the web.",
+  "author": "Rick Carlino",
+  "private": true,
+  "scripts": {
+    "start": "./scripts/dev"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "static-here": "*"
+  }
+}

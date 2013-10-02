@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+./node_modules/coffee-script/bin/coffee -m -cw -o . . &
+sleep 1
+./node_modules/static-here/bin/static-here
+echo "Press ctrl + c to close server"
