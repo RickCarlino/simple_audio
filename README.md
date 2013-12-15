@@ -58,3 +58,7 @@ Optionally, you may specify a filename for the download.
 ```coffeescript
 voice.download('whatdoesthefoxsay.wav')
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rickcarlino/simple_audio/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
